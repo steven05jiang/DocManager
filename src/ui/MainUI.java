@@ -29,6 +29,7 @@ class MainWindow extends JFrame implements ActionListener{
 	Warning info;
 	public MainWindow(){
 		Container con = getContentPane();
+		setTitle("File Filter");
 		con.setLayout(new GridLayout(4,2));
 		src = new AddPath("Source:");
 		dst = new AddPath("Destination:");

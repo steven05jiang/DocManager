@@ -23,9 +23,9 @@ public class MoveFile {
 		int seq = 0;
 		for(String s : docs){
 			File t = new File(src +"\\" + s);
-			if(t.isDirectory()) 
+			if(t.isDirectory() && !dst.equals(t.getAbsolutePath())) 
 				copyFile(t.getAbsolutePath(), dst, target);
-			else if(s.equals(target)){
+			else if(t.isFile() && s.equals(target)){
 				while(new File(dst+"\\"+ seq + target).isFile()) ++seq;
 				transFile(t, dstDir, seq + target);
 				++seq;
