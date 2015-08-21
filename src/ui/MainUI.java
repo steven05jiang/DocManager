@@ -26,7 +26,7 @@ class MainWindow extends JFrame implements ActionListener{
 	JTextField srcPath, dstPath, tarName;
 	JButton confirm, clear;
 	JFileChooser fileChsr;
-	Warning error;
+	Warning info;
 	public MainWindow(){
 		Container con = getContentPane();
 		con.setLayout(new GridLayout(4,2));
@@ -39,13 +39,13 @@ class MainWindow extends JFrame implements ActionListener{
 		confirm = new JButton("Confirm");
 		clear = new JButton("Clear");
 		fileChsr = new JFileChooser("E:\\");
-		error = new Warning(this, "Wrong Path.");
+		info = new Warning(this, "");
 		src.button.addActionListener(this);
 		dst.button.addActionListener(this);
 		target.button.addActionListener(this);
 		confirm.addActionListener(this);
 		clear.addActionListener(this);
-		error.button.addActionListener(this);
+		info.button.addActionListener(this);
 		con.add(src);
 		con.add(srcPath);
 		con.add(dst);
@@ -83,19 +83,29 @@ class MainWindow extends JFrame implements ActionListener{
 		}
 		else if(e.getSource() == confirm){
 			MoveFile move = new MoveFile();
-			if(!move.checkPath(srcPath.getText(), dstPath.getText()))
-				error.setVisible(true);
-			else{
-				move.copyFile(srcPath.getText(), dstPath.getText(), tarName.getText());
+			if(!move.checkPath(srcPath.getText(), dstPath.getText())){
+				info.label.setText("Wrong Path.");
+				info.setVisible(true);
 			}
+			else{
+				if (move.copyFile(srcPath.getText(), dstPath.getText(), tarName.getText())){
+					info.label.setText("Copy Success.");
+					info.setVisible(true);
+				}
+				else{
+					info.label.setText("Copy Error");
+					info.setVisible(true);
+				}
+			}
+				
 		}
 		else if(e.getSource() == clear){
 			srcPath.setText("");
 			dstPath.setText("");
 			tarName.setText("");
 		}
-		else if(e.getSource() == error.button){
-			error.setVisible(false);
+		else if(e.getSource() == info.button){
+			info.setVisible(false);
 		}
 		else{}
 	}
