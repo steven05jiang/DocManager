@@ -33,7 +33,7 @@ class MainWindow extends JFrame implements ActionListener{
 		con.setLayout(new GridLayout(4,2));
 		src = new AddPath("Source:");
 		dst = new AddPath("Destination:");
-		target = new AddPath("Target:");
+		target = new AddPath("Keyword:");
 		srcPath = new JTextField(20);
 		dstPath = new JTextField(20);
 		tarName = new JTextField(20);

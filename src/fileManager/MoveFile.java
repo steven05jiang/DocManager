@@ -25,10 +25,9 @@ public class MoveFile {
 			File t = new File(src +"\\" + s);
 			if(t.isDirectory() && !dst.equals(t.getAbsolutePath())) 
 				copyFile(t.getAbsolutePath(), dst, target);
-			else if(t.isFile() && s.equals(target)){
-				while(new File(dst+"\\"+ seq + target).isFile()) ++seq;
-				transFile(t, dstDir, seq + target);
-				++seq;
+			else if(t.isFile() && s.contains(target)){
+				while(new File(dst+"\\"+ seq + s).isFile()) ++seq;
+				transFile(t, dstDir, seq + s);
 			}
 		}
 		return true;
