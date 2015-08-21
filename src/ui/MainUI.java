@@ -89,7 +89,9 @@ class MainWindow extends JFrame implements ActionListener{
 				info.setVisible(true);
 			}
 			else{
+				setTitle("Processing...");
 				if (move.copyFile(srcPath.getText(), dstPath.getText(), tarName.getText())){
+					setTitle("File Filter");
 					info.label.setText("Copy Success.");
 					info.setVisible(true);
 				}
@@ -130,6 +132,7 @@ class Warning extends JDialog{
 	public Warning(JFrame parent, String s){
 		super();
 //		setSize(300, 100);
+		setModal(true);
 		Container con = getContentPane();
 		label = new JLabel(s, JLabel.CENTER);
 		button = new JButton("OK");
